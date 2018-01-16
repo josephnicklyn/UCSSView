@@ -30,6 +30,7 @@ public class TermGetterView extends FrameLayout {
 
     LinearLayout template_get_data_list;
     ProgressBar template_get_data_progressBar;
+
     public TermGetterView(Context context) {
         super(context);
         LayoutInflater inflater = (LayoutInflater)getContext().getSystemService
@@ -91,7 +92,7 @@ public class TermGetterView extends FrameLayout {
             term = forTerm;
             setText(forTerm.getText());
             template_get_data_list.addView(TermButton.this, 0);
-
+            setTextColor(0xFF606060);
             this.getLayoutParams().width = LayoutParams.MATCH_PARENT;
             this.getLayoutParams().height = LayoutParams.WRAP_CONTENT;
             setOnClickListener(TermButton.this);
@@ -109,27 +110,7 @@ public class TermGetterView extends FrameLayout {
 
                 if (term.isEmpty()) {
                     wasSelected = true;
-                    disable();
-
-                    template_get_data_progressBar.setVisibility(View.VISIBLE);
-                    SVSUAPIGetter.getInstance().getCourseData(
-                            template_get_data_progressBar,
-                            term,
-                            new UIThreadSyncCallback() {
-                                @Override
-                                protected void onFinished() {
-                                    template_get_data_progressBar.setVisibility(View.GONE);
-                                    enabled();
-                                    UCSSController.getAdapter().selectTerm(term);
-                                }
-
-                                @Override
-                                protected void onException(final String source, final String message) {
-                                    Log.e("SVSU", source + " <=> " + message);
-                                    enabled();
-                                }
-                            }
-                    );
+                    UCSSController.getAdapter().selectTerm(term);
                 } else {
                     UCSSController.getAdapter().selectTerm(term);
                     template_get_data_progressBar.setVisibility(View.GONE);
@@ -144,12 +125,9 @@ public class TermGetterView extends FrameLayout {
             if (v instanceof TermButton) {
                 TermButton tv = (TermButton)v;
                 if (tv == termButton)
-                    tv.setTextColor(0xFF0080FF);
+                    tv.setTextColor(0xFF6080A0);
                 else {
-                    if (tv.wasSelected)
-                        tv.setTextColor(0xFF0060A0);
-                    else
-                        tv.setTextColor(0xFF000000);
+                    tv.setTextColor(0xFF606060);
                 }
             }
 

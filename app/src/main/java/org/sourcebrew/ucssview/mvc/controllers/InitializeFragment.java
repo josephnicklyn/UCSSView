@@ -20,8 +20,8 @@ import org.sourcebrew.ucssview.network.UIThreadSyncCallback;
  */
 public class InitializeFragment extends UCSSFragment {
 
-    private TermGetterView termGetterView;
-    private ViewGroup initializeFragmentMainView;
+   // private TermGetterView termGetterView;
+    //private ViewGroup initializeFragmentMainView;
 
     public InitializeFragment() {
         // Required empty public constructor
@@ -34,10 +34,10 @@ public class InitializeFragment extends UCSSFragment {
 
         View v = inflater.inflate(R.layout.fragment_initialize, container, false);
 
-        initializeFragmentMainView = (ViewGroup)v.findViewById(R.id.initializeFragmentMainView);
-        termGetterView = new TermGetterView(getContext());
+        //initializeFragmentMainView = (ViewGroup)v.findViewById(R.id.initializeFragmentMainView);
+        //termGetterView = new TermGetterView(getContext());
 
-        initializeFragmentMainView.addView(termGetterView);
+       // initializeFragmentMainView.addView(termGetterView);
         return v;
     }
 
@@ -49,6 +49,7 @@ public class InitializeFragment extends UCSSFragment {
     }
 
     private void initialize() {
+       /*
         SVSUAPIGetter.getInstance().setHost("https://api.svsu.edu/").getBasics(
                 null,
                 new UIThreadSyncCallback() {
@@ -58,6 +59,7 @@ public class InitializeFragment extends UCSSFragment {
                     }
                 }
         );
+        */
     }
 
 }

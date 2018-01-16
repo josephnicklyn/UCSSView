@@ -38,7 +38,7 @@
 
     <color name="colorDayLabelBorderColor">#808080</color>
     <color name="colorDayabelTextColor">#E8EFFF</color>
-
+    <color name="borderColor">#dadae4</color>
 
 
 </resources>

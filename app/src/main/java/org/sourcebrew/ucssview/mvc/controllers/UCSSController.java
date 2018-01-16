@@ -74,11 +74,11 @@ public class UCSSController extends FragmentStatePagerAdapter {
             }
         });
 
-        addTab("Home", homeFragment);
-        addTab("Views", campusViewFragment);
-        addTab("Terms", initializeFragment);
+        addTab("Terms", homeFragment);
+        addTab("Graphs", campusViewFragment);
+        addTab("Context", initializeFragment);
 
-        setTab(1);
+        //setTab(1);
 
     }
 
@@ -134,10 +134,10 @@ public class UCSSController extends FragmentStatePagerAdapter {
 
        // }
 
-        setTab(1, false);
+        setTab(1, true);
     }
 
-    public TermModel getTermModel() {
+    public  TermModel getTermModel() {
         return termModel;
     }
 
