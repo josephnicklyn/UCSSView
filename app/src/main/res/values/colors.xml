@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#B8C8FF</color>
+
+    <color name="colorHourChangeButtonBar">#212131</color>
+    <color name="colorHourChangeButtonFill">#9191a1</color>
+
+    <color name="xcolorHourLabel">#4F61C5</color>
+    <color name="xcolorAfterHoursLabel">#2F41A5</color>
+    <color name="xcolorHourLabelBorderColor">#5F71d5</color>
+
+
+    <color name="xcolorDayLabel">#4F61D5</color>
+    <color name="xcolorDayLabelDark">#3F51C5</color>
+    <color name="xcolorDayWeekendLabel">#3849bd</color>
+
+    <color name="xcolorDayLabelBorderColor">#5F71d5</color>
+    <color name="xcolorDayabelTextColor">#E8EFFF</color>
+
+    <color name="xcolorDayEvent">#E8EFFF</color>
+    <color name="xcolorDayEventDark">#d8e2ea</color>
+
+    <color name="colorHourLabelTextColor">#EaEaf0</color>
+
+    <color name="colorHourLabel">#4F4F64</color>
+    <color name="colorAfterHoursLabel">#2F2f54</color>
+    <color name="colorHourLabelBorderColor">#5F5f74</color>
+
+
+    <color name="colorDayEvent">#f8f8f8</color>
+    <color name="colorDayEventDark">#e8e8e8</color>
+
+    <color name="colorDayLabel">#898989</color>
+    <color name="colorDayLabelDark">#797979</color>
+    <color name="colorDayWeekendLabel">#696969</color>
+
+    <color name="colorDayLabelBorderColor">#808080</color>
+    <color name="colorDayabelTextColor">#E8EFFF</color>
+
+
+
+</resources>
