@@ -65,17 +65,8 @@ public class PrefixModel  extends Model implements Iterable<CourseModel> {
     @Override
     public String toString() {
 
-        if (courses.isEmpty())
-            return "";
 
-        StringBuilder b = new StringBuilder();
-        String header =  key + ":" + value;
-        b.append(header).append(" {");
-        for(CourseModel c: courses) {
-            b.append("\n\t").append(c.toString());
-        }
-        b.append("\n}");
-        return b.toString();
+        return getPrefix() + ": " + getDescription();
     }
 
     public static ModelMap<PrefixModel> getPrefixes() {

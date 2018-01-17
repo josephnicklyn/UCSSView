@@ -6,19 +6,42 @@
     android:orientation="vertical"
     tools:context="org.sourcebrew.ucssview.mvc.controllers.CampusViewFragment">
 
-    <FrameLayout
+    <LinearLayout
         android:id="@+id/graphs_list_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:padding="4dp"
+        android:orientation="vertical"
         android:visibility="visible">
 
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:padding="4dp"
+            android:text="select upto 3 prefixes (close the selector to show graph)" />
         <org.sourcebrew.ucssview.mvc.views.RangeSelect
             android:id="@+id/graphs_range_select"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"></org.sourcebrew.ucssview.mvc.views.RangeSelect>
-    </FrameLayout>
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:visibility="gone">
+
+
+        </org.sourcebrew.ucssview.mvc.views.RangeSelect>
+        <ScrollView
+            android:id="@+id/graphs_scroll_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+            <FrameLayout
+                android:id="@+id/graphs_select_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"></FrameLayout>
+        </ScrollView>
+    </LinearLayout>
 
     <org.sourcebrew.ucssview.timegraph.EventGraph
         android:id="@+id/eventGraph"

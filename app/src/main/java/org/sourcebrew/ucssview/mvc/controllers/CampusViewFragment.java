@@ -8,13 +8,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import org.sourcebrew.ucssview.R;
 import org.sourcebrew.ucssview.mvc.models.CourseModel;
+import org.sourcebrew.ucssview.mvc.models.PrefixModel;
 import org.sourcebrew.ucssview.mvc.models.SectionModel;
 import org.sourcebrew.ucssview.mvc.models.TermModel;
+import org.sourcebrew.ucssview.mvc.views.CourseSelectView;
+import org.sourcebrew.ucssview.mvc.views.PrefixSelector;
 import org.sourcebrew.ucssview.mvc.views.RangeSelect;
+import org.sourcebrew.ucssview.network.SVSUAPIGetter;
+import org.sourcebrew.ucssview.network.UIThreadSyncCallback;
 import org.sourcebrew.ucssview.timegraph.EventGraph;
 
 import java.util.Iterator;
@@ -33,9 +39,11 @@ public class CampusViewFragment extends UCSSFragment
     private ImageView graphs_view_toggle;
     private ViewGroup graphs_list_layout;
     private RangeSelect graphs_range_select;
-
-
+    private ViewGroup graphs_select_container;
+    private ScrollView graphs_scroll_view;
     private String viewMessage = "";
+
+    private PrefixSelector prefixSelector;
 
     public CampusViewFragment() {
         // Required empty public constructor
@@ -54,9 +62,14 @@ public class CampusViewFragment extends UCSSFragment
         graphs_list_layout = v.findViewById(R.id.graphs_list_layout);
         graphs_range_select = v.findViewById(R.id.graphs_range_select);
 
+        graphs_select_container = v.findViewById(R.id.graphs_select_container);
+
         graphs_range_select.hideLabels();
         graphs_range_select.addOptions("COURSES", "INSTRUCTORS", "ROOMS");
+        graphs_scroll_view = v.findViewById(R.id.graphs_scroll_view);
 
+        prefixSelector = new PrefixSelector(getContext());
+        graphs_select_container.addView(prefixSelector);
 
         graphs_view_toggle.setOnClickListener(this);
 
@@ -66,45 +79,43 @@ public class CampusViewFragment extends UCSSFragment
     @Override
     public void termChanged(TermModel term) {
         updateUI();
-        /*
-        Log.e("TERM_CHANGE", term.toString() + ", " + SectionModel.getSections().size() + ", " + CourseModel.getCourses().size());
-        Iterator it = SectionModel.getSections().entrySet().iterator();
-        eventGraph.clear();
-        while(it.hasNext()) {
-            Map.Entry me = (Map.Entry)it.next();
-            SectionModel sm = (SectionModel) me.getValue();
-            if (sm.getTermModel() == term) {
-                if (sm.getCourseModel().getPrefix().equalsIgnoreCase("cs")) {
-                    eventGraph.addSectionModel(sm);
-                }
-            }
-        }
-        */
+        updateGraph(true);
     }
 
     private void updateUI() {
+        prefixSelector.updateIfEmpty();
+    }
 
+    private void setLable() {
         String termLabel = (UCSSController.getAdapter().getTermModel()!=null)?
                 UCSSController.getAdapter().getTermModel().getCode():
                 "NOTHING SELECTED";
-        graphs_info_text.setText(termLabel + ": " + viewMessage);
-
+        graphs_info_text.setText(termLabel + "\t" + viewMessage);
     }
 
     private void toggleView() {
-
         eventGraph.setVisibility(graphs_list_layout.getVisibility());
+        updateGraph(false);
+        graphs_list_layout.setVisibility((graphs_list_layout.getVisibility()==View.GONE)?
+                View.VISIBLE:View.GONE);
 
-        int v = (graphs_list_layout.getVisibility()==View.GONE)?
-                View.VISIBLE:View.GONE;
+    }
 
-        if (v == View.VISIBLE) {
-            graphs_view_toggle.setImageResource(R.drawable.ic_arrow_drop_down);
+    private void updateGraph(boolean force) {
+        if (force) {
+            viewMessage = prefixSelector.updateGraph(eventGraph, force);
+            setLable();
         } else {
-            graphs_view_toggle.setImageResource(R.drawable.ic_arrow_drop);
+            int v = (graphs_list_layout.getVisibility() == View.GONE) ?
+                    View.VISIBLE : View.GONE;
+            if (v == View.VISIBLE) {
+                graphs_view_toggle.setImageResource(R.drawable.ic_arrow_drop_down);
+            } else {
+                graphs_view_toggle.setImageResource(R.drawable.ic_arrow_drop);
+                viewMessage = prefixSelector.updateGraph(eventGraph, force);
+                setLable();
+            }
         }
-        graphs_list_layout.setVisibility(v);
-
     }
 
     @Override

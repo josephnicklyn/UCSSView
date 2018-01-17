@@ -74,9 +74,10 @@ public class UCSSController extends FragmentStatePagerAdapter {
             }
         });
 
+        addTab("Home", initializeFragment);
         addTab("Terms", homeFragment);
         addTab("Graphs", campusViewFragment);
-        addTab("Context", initializeFragment);
+
 
         //setTab(1);
 
@@ -125,16 +126,13 @@ public class UCSSController extends FragmentStatePagerAdapter {
      */
 
     public void selectTerm(TermModel term) {
-        //if (termModel != term) {
-            setTitle(term.getValue());
-            termModel = term;
-            homeFragment.termChanged(term);
-            campusViewFragment.termChanged(term);
-            initializeFragment.termChanged(term);
+        setTitle(term.getValue());
+        termModel = term;
+        homeFragment.termChanged(term);
+        campusViewFragment.termChanged(term);
+        initializeFragment.termChanged(term);
 
-       // }
-
-        setTab(1, true);
+        setTab(2, true);
     }
 
     public  TermModel getTermModel() {
@@ -151,5 +149,12 @@ public class UCSSController extends FragmentStatePagerAdapter {
 
     public UCSSFragment getCurrentFragment() {
         return currentFragment;
+    }
+
+    public String getSelectedTerm() {
+        if (getTermModel() != null)
+            return getTermModel().getCode();
+        else
+            return null;
     }
 }

@@ -142,6 +142,13 @@ public class EventItem {
         );
     }
 
+    public static int pastel40(int value) {
+        return pastels(
+                ((value%40)*9),
+                true
+        );
+    }
+
     public static int pastel20(int value) {
         return pastels(
                 ((value%20)*18),
@@ -150,6 +157,9 @@ public class EventItem {
     }
 
     public static int pastels(int hue, boolean lo) {
+        //hue/=3;
+        //hue*=2;
+        hue/=2;
         return Color.HSVToColor(
             new float[] {
                     (float)(hue % 360),

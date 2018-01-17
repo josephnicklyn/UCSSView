@@ -33,6 +33,10 @@ public class CourseModel extends Model {
         return prefixModel;
     }
 
+    @Override public String toString() {
+        return getCourseNumber() + " - " + getTitle();
+    }
+
     public int getPrefixModelIndex() {
         getPrefixModel();
         if (prefixModel != null)

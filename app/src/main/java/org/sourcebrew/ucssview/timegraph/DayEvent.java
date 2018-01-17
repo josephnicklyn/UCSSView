@@ -197,6 +197,7 @@ public class DayEvent extends FrameLayout {
     private static TextPaint eventSubTitlePaint;
     private static boolean showSubtitles = true;
 
+
     private void calcHeights() {
         if (!intializedHeight) {
             getEventTitlePaint();
@@ -248,7 +249,7 @@ public class DayEvent extends FrameLayout {
             eventDefaultColor.setAntiAlias(true);
         }
 
-        eventDefaultColor.setColor(EventItem.pastel20(colorIndex));
+        eventDefaultColor.setColor(EventItem.pastel60(colorIndex));
         return eventDefaultColor;
     }
 
@@ -339,6 +340,7 @@ public class DayEvent extends FrameLayout {
             }
         }
         item.setYOffset(forRow);
+
         eventItems.add(item);
         mLargestY = getTallest();
         //invalidate();

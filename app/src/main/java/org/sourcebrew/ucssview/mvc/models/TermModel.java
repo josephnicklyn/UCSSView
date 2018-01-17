@@ -40,7 +40,13 @@ public class TermModel extends Model implements Iterable<SectionModel> {
         getTerms().put(TermModel.this);
     }
 
-
+    public boolean containsPrefixFor(PrefixModel pm) {
+        for(SectionModel sm: this) {
+            if (sm.getCourseModel().getPrefixModel() == pm)
+                return true;
+        }
+        return false;
+    }
 
     public String getCode() {
         return super.getKey();

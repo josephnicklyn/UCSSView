@@ -289,6 +289,7 @@ public class EventGraph extends FrameLayout implements View.OnClickListener {
         }
     }
 
+
     public void addSectionModel(SectionModel sm) {
         Iterator it = sm.getMeetings().entrySet().iterator();
 
@@ -312,7 +313,7 @@ public class EventGraph extends FrameLayout implements View.OnClickListener {
                     meet.toString(),
                     meet.toMinutesStartTime(),
                     meet.toMinutesDuration(),
-                    sm.getCourseModel().getModelIndex()
+                    sm.getCourseModel().getPrefixModelIndex()
                 );
                 eventItem.setSubTitle(meet.getInstructor());
                 dayEvents[dayIndex].addEventItem(eventItem);
