@@ -1,5 +1,6 @@
 package org.sourcebrew.ucssview.timegraph;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -9,9 +10,11 @@ import android.support.annotation.NonNull;
 import android.text.TextPaint;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.sourcebrew.ucssview.R;
 
@@ -54,9 +57,37 @@ public class DayEvent extends FrameLayout {
         day = (forDay % 7);
         init();
     }
+    //private float mDownX, mDownY;
+
+    private int getOnItem(MotionEvent event) {
+        for(int i = 0; i < eventItems.size(); i++) {
+            EventItem item = eventItems.get(i);
+            if (item.hitTest(event))
+                return i;
+        }
+        return -1;
+    }
+    private int downOnItem;
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        switch (event.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+                downOnItem = getOnItem(event);
+                break;
+            case MotionEvent.ACTION_UP: {
+                if (downOnItem >= 0) {
+                    int upOnItem = getOnItem(event);
+                    if (upOnItem == downOnItem) {
+                        Toast.makeText(getContext(), eventItems.get(downOnItem).getToastMessage(),
+                                Toast.LENGTH_LONG).show();
+                    }
+                }
+            } break;
+        }
+        return true;
+    }
 
     private void init() {
-
         setHelpers();
 
         if (day % 2 == 0) {
@@ -249,7 +280,7 @@ public class DayEvent extends FrameLayout {
             eventDefaultColor.setAntiAlias(true);
         }
 
-        eventDefaultColor.setColor(EventItem.pastel60(colorIndex));
+        eventDefaultColor.setColor(EventItem.pastel40(colorIndex));
         return eventDefaultColor;
     }
 
@@ -295,6 +326,8 @@ public class DayEvent extends FrameLayout {
 
       //  if (eventRight < buttonBarWidth || eventLeft > getWidth())
       //      return (int)eventBottom;
+
+        e.setPostion(eventLeft, eventTop, eventRight, eventBottom);
 
         c.drawRoundRect(
                 eventLeft,

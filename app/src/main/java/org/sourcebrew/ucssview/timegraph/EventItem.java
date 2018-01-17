@@ -5,6 +5,8 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.text.TextPaint;
+import android.util.Log;
+import android.view.MotionEvent;
 
 import java.util.Random;
 
@@ -70,6 +72,17 @@ public class EventItem {
 
     }
 
+    private float X1, Y1, X2, Y2;
+
+    public void setPostion(float x1, float y1, float x2, float y2) {
+        X1 = x1; Y1 = y1; X2 = x2; Y2 = y2;
+
+    }
+
+    public boolean hitTest(MotionEvent ev) {
+        return (ev.getX() >= X1 && ev.getX() <= X2) && (ev.getY() >= Y1 && ev.getY() <= Y2);
+    }
+
     public int getStartTime() {
         return startTime;
     }
@@ -97,6 +110,18 @@ public class EventItem {
             title = value;
         }
     }
+
+    private String toastMessage = "";
+    public String getToastMessage() {
+        return toastMessage;
+    }
+
+    public void setToastMessage(String value) {
+        if (value != null && !value.isEmpty()) {
+            toastMessage = value;
+        }
+    }
+
 
     public String getSubTitle() {
         return subTitle;

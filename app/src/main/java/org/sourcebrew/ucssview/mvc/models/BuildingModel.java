@@ -120,13 +120,16 @@ public class BuildingModel extends Model {
 
         @Override
         public String toString() {
-            return getRoom();
+            return getKey();
         }
     }
 
     @Override
     public String toString() {
+        return getBuilding();
+        /*
         StringBuilder b = new StringBuilder();
+
         b.append("Building: ").append(getBuilding()).append(" @").append(getLocation()).append(" {\n");
 
         Iterator it = getRooms().entrySet().iterator();
@@ -144,6 +147,7 @@ public class BuildingModel extends Model {
 
 
         return b.toString();
+        */
     }
 
 }

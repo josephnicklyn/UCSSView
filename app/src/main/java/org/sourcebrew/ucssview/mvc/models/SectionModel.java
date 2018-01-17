@@ -191,6 +191,13 @@ public class SectionModel extends Model {
                 return "????";
         }
 
+        public String getInstructorName() {
+            if (instructorsModel != null)
+                return instructorsModel.getName();
+            else
+                return "????";
+        }
+
         private int toInt(String s) {
             int r = 0;
 
@@ -234,6 +241,28 @@ public class SectionModel extends Model {
 
         public InstructorsModel getInstructorsModel() {
             return instructorsModel;
+        }
+
+        public String getToastMessage() {
+            String rm = "not in a room";
+            if (getRoomModel() !=null) {
+                if (getRoomModel().getBuilding() != null) {
+                    rm = getRoomModel().getBuilding().toString() + " - ";
+                } else {
+                    rm = "";
+                }
+
+                rm+=getRoomModel().toString();
+            }
+            return getCourseModel().getPrefix() + ":" +
+                   getCourseModel().getCourseNumber() +
+                   ", " + getCourseModel().getTitle() +
+                   "\n" + rm + "\n" + getTimeString() +
+                   "\n" + getInstructorName();
+        }
+
+        public String getTimeString() {
+            return startTime + " to " + endTime;
         }
 
         @Override

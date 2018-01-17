@@ -90,7 +90,7 @@ public class CampusViewFragment extends UCSSFragment
         String termLabel = (UCSSController.getAdapter().getTermModel()!=null)?
                 UCSSController.getAdapter().getTermModel().getCode():
                 "NOTHING SELECTED";
-        graphs_info_text.setText(termLabel + "\t" + viewMessage);
+        graphs_info_text.setText(termLabel + "    " + viewMessage);
     }
 
     private void toggleView() {

@@ -316,6 +316,7 @@ public class EventGraph extends FrameLayout implements View.OnClickListener {
                     sm.getCourseModel().getPrefixModelIndex()
                 );
                 eventItem.setSubTitle(meet.getInstructor());
+                eventItem.setToastMessage(meet.getToastMessage());
                 dayEvents[dayIndex].addEventItem(eventItem);
             }
         }
